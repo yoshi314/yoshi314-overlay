@@ -7,7 +7,7 @@ DESCRIPTION="List of mirrors for pacman"
 
 HOMEPAGE="http://archlinux.org/pacman"
 
-SRC_URI="http://repos.archlinux.org/viewvc.cgi/pacman-mirrorlist/trunk/mirrorlist?view=co"
+#SRC_URI="http://repos.archlinux.org/viewvc.cgi/pacman-mirrorlist/trunk/mirrorlist?view=co"
 
 LICENSE="GPL-2"
 
@@ -22,6 +22,7 @@ RDEPEND=""
 S=${WORKDIR}/${P}
 
 src_install() {
+	wget http://repos.archlinux.org/viewvc.cgi/pacman-mirrorlist/trunk/mirrorlist?view=co -O mirrorlist
 	insinto /etc/pacman.d
 	doins mirrorlist 
 }
