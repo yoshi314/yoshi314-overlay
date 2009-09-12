@@ -18,15 +18,19 @@ KEYWORDS="~x86 ~amd64"
 
 IUSE="debug doxygen fakeroot"
 
+
+RDEPEND="app-arch/libarchive
+		net-libs/libfetch
+		fakeroot? ( sys-apps/fakeroot )
+		doxygen? ( app-doc/doxygen )"
+
+DEPEND="${RDEPEND}"
+
+
 # A space delimited list of portage features to restrict. man 5 ebuild
 # for details. Usually not needed.
 #RESTRICT="strip"
 
-DEPEND="dev-libs/libdownload
-app-arch/pacman-mirrorlist
-app-arch/libarchive
-fakeroot? ( sys-apps/fakeroot )
-doxygen? ( app-doc/doxygen )"
 
 RDEPEND=""
 
