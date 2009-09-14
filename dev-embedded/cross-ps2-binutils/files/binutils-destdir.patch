@@ -1,0 +1,240 @@
+diff -r -u binutils-2.14/bfd/po/Make-in binutils-2.14-patched/bfd/po/Make-in
+--- binutils-2.14/bfd/po/Make-in	Thu Nov 22 11:21:01 2001
++++ binutils-2.14-patched/bfd/po/Make-in	Wed Jun  2 15:27:54 2004
+@@ -124,9 +124,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r $(MKINSTALLDIRS); then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -136,7 +136,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r $(MKINSTALLDIRS); then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -166,12 +166,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r $(MKINSTALLDIRS); then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
+diff -r -u binutils-2.14/binutils/po/Make-in binutils-2.14-patched/binutils/po/Make-in
+--- binutils-2.14/binutils/po/Make-in	Mon May  3 03:29:10 1999
++++ binutils-2.14-patched/binutils/po/Make-in	Wed Jun  2 15:26:49 2004
+@@ -111,9 +111,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r $(MKINSTALLDIRS); then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -123,7 +123,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r $(MKINSTALLDIRS); then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -153,12 +153,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r $(MKINSTALLDIRS); then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
+diff -r -u binutils-2.14/gas/po/Make-in binutils-2.14-patched/gas/po/Make-in
+--- binutils-2.14/gas/po/Make-in	Mon May  3 03:28:45 1999
++++ binutils-2.14-patched/gas/po/Make-in	Wed Jun  2 15:28:52 2004
+@@ -111,9 +111,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r $(MKINSTALLDIRS); then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -123,7 +123,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r $(MKINSTALLDIRS); then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -153,12 +153,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r $(MKINSTALLDIRS); then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
+diff -r -u binutils-2.14/gprof/po/Make-in binutils-2.14-patched/gprof/po/Make-in
+--- binutils-2.14/gprof/po/Make-in	Thu May  2 04:15:00 2002
++++ binutils-2.14-patched/gprof/po/Make-in	Wed Jun  2 15:29:21 2004
+@@ -113,9 +113,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r $(MKINSTALLDIRS); then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -125,7 +125,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r $(MKINSTALLDIRS); then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -155,12 +155,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r $(MKINSTALLDIRS); then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
+diff -r -u binutils-2.14/ld/po/Make-in binutils-2.14-patched/ld/po/Make-in
+--- binutils-2.14/ld/po/Make-in	Mon May  3 03:29:07 1999
++++ binutils-2.14-patched/ld/po/Make-in	Wed Jun  2 15:30:17 2004
+@@ -111,9 +111,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r $(MKINSTALLDIRS); then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -123,7 +123,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r $(MKINSTALLDIRS); then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -153,12 +153,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r $(MKINSTALLDIRS); then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
+diff -r -u binutils-2.14/opcodes/po/Make-in binutils-2.14-patched/opcodes/po/Make-in
+--- binutils-2.14/opcodes/po/Make-in	Mon May  3 03:29:01 1999
++++ binutils-2.14-patched/opcodes/po/Make-in	Wed Jun  2 15:32:18 2004
+@@ -111,9 +111,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r $(MKINSTALLDIRS); then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -123,7 +123,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r $(MKINSTALLDIRS); then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -153,12 +153,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r $(MKINSTALLDIRS); then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
