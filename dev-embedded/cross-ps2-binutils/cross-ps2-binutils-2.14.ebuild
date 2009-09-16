@@ -32,7 +32,6 @@ S="${WORKDIR}/binutils-${PV}"
 src_unpack() {
   unpack ${A}
   # Set environment variables
-  unset CFLAGS CXXFLAGS
 
   epatch ${FILESDIR}/binutils-${PV}-PS2.patch || die "binutils-${PV}.patch failed"
   epatch ${FILESDIR}/binutils-destdir.patch || die "binutils-destdir-patch failed"
@@ -46,13 +45,14 @@ src_configure() {
 src_compile() {
 	cd ${S}
     for _target in "ee" "iop" "dvp"; do
-    einfo "Building binutils for $TARGET..."
+    einfo "Building binutils for $_target ..."
+    unset CFLAGS CXXFLAGS
+	CC=gcc-3.4.6
+    CC=gcc-3.4.6 ./configure --prefix="/$_prefix/$_target" --target="$_target" || return 1
 
-    ./configure --prefix="/$_prefix/$_target" --target="$_target" || return 1
-
-    make clean
-    make || die "make failed"
-    make -j1 DESTDIR=${D} install || die "installation failed at target	${_target}"
+    CC=gcc-3.4.6 make clean
+    CC=gcc-3.4.6 make || die "make failed"
+    CC=gcc-3.4.6 make -j1 DESTDIR=${D} install || die "installation failed at target	${_target}"
   done
 }
 
