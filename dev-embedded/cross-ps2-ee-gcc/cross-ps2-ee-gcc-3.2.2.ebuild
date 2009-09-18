@@ -35,13 +35,13 @@ src_configure() {
 }
 
 src_compile() {
-    cd ${S}
-    PATH=$PATH:/$_prefix/ee/bin
-    einfo "building EE gcc"    
-    ./configure --prefix="/$_prefix/ee" --target="ee" --enable-languages="c,c++" --with-newlib --with-headers=/$_prefix/ee --enable-cxx-flags="-G0" || die "configure failed"
-    make clean
-    make CFLAGS_FOR_TARGET="-G0" || die "make failed"
-    make -j1 DESTDIR=${D} install || die "installation failed"
-    rm ${D}/$_prefix/ee/lib/libiberty.a
-    rm ${D}/$_prefix/ee/bin/ee-c++filt
+	cd ${S}
+	PATH=$PATH:/$_prefix/ee/bin
+	einfo "building EE gcc"    
+	CC=gcc-3.4.6 ./configure --prefix="/$_prefix/ee" --target="ee"	--enable-languages="c,c++" --with-newlib --with-headers=${D}/$_prefix/ee --enable-cxx-flags="-G0" || die "configure failed"
+	CC=gcc-3.4.6 make clean
+	CC=gcc-3.4.6 make CFLAGS_FOR_TARGET="-G0" || die "make failed"
+	make -j1 DESTDIR=${D} install || die "installation failed"
+	rm ${D}/$_prefix/ee/lib/libiberty.a
+	rm ${D}/$_prefix/ee/bin/ee-c++filt
 }

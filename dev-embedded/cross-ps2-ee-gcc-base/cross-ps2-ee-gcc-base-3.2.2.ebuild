@@ -38,10 +38,10 @@ src_compile() {
     cd ${S}
     PATH=$PATH:/$_prefix/ee/bin
     einfo "building EE gcc"    
-    ./configure --prefix="/$_prefix/ee" --target="ee" --enable-languages="c" --with-newlib --without-headers || die "configure failed"
+    CC=gcc-3.4.6 ./configure --prefix="/$_prefix/ee" --target="ee" --enable-languages="c" --with-newlib --without-headers || die "configure failed"
     make clean
-    make || die "make failed"
-    make -j1 DESTDIR=${D} install || die "installation failed"
+    CC=gcc-3.4.6 make || die "make failed"
+    CC=gcc-3.4.6 make -j1 DESTDIR=${D} install || die "installation failed"
     rm ${D}/$_prefix/ee/lib/libiberty.a
 }
 
