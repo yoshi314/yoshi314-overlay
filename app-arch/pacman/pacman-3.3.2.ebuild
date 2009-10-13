@@ -21,7 +21,6 @@ IUSE="debug doxygen fakeroot"
 
 RDEPEND="app-arch/libarchive
 		net-libs/libfetch
-		fakeroot? ( sys-apps/fakeroot )
 		doxygen? ( app-doc/doxygen )"
 
 DEPEND="${RDEPEND}"
@@ -37,7 +36,7 @@ RDEPEND=""
 S=${WORKDIR}/${P}
 
 src_compile() {
-	econf $(use_enable doxygen) $(use_enable debug) $(use_enable fakeroot) || die "econf failed"
+	econf $(use_enable doxygen) $(use_enable debug) || die "econf failed"
 	emake || die "emake failed"
 }
 
