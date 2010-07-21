@@ -1,0 +1,40 @@
+--- data/pcsx.glade2	2007-10-13 23:23:31.000000000 +0300
++++ data/pcsx.glade.new	2007-12-17 19:15:49.000000000 +0200
+@@ -20,7 +20,7 @@
+             <child>
+               <widget class="GtkMenuItem" id="item1">
+                 <property name="visible">True</property>
+-                <property name="label" translatable="yes">File</property>
++                <property name="label" translatable="yes">_File</property>
+                 <property name="use_underline">True</property>
+                 <child>
+                   <widget class="GtkMenu" id="item1_menu">
+@@ -281,7 +281,7 @@
+             <child>
+               <widget class="GtkMenuItem" id="emulator1">
+                 <property name="visible">True</property>
+-                <property name="label" translatable="yes">Emulator</property>
++                <property name="label" translatable="yes">_Emulator</property>
+                 <property name="use_underline">True</property>
+                 <child>
+                   <widget class="GtkMenu" id="emulator1_menu">
+@@ -322,7 +322,7 @@
+             <child>
+               <widget class="GtkMenuItem" id="configuration1">
+                 <property name="visible">True</property>
+-                <property name="label" translatable="yes">Configuration</property>
++                <property name="label" translatable="yes">_Configuration</property>
+                 <property name="use_underline">True</property>
+                 <child>
+                   <widget class="GtkMenu" id="configuration1_menu">
+@@ -385,7 +385,7 @@
+             <child>
+               <widget class="GtkMenuItem" id="help1">
+                 <property name="visible">True</property>
+-                <property name="label" translatable="yes">Help</property>
++                <property name="label" translatable="yes">_Help</property>
+                 <property name="use_underline">True</property>
+                 <child>
+                   <widget class="GtkMenu" id="help1_menu">
+
+
