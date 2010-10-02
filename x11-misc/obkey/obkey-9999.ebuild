@@ -31,9 +31,6 @@ src_prepare() {
 	python_copy_sources
 }
 
-src_configure() {
-	python_src_configure
-}
 
 src_install() {
 	python_src_install
