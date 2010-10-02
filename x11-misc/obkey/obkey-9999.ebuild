@@ -33,6 +33,6 @@ src_compile() {
 }
 
 src_install() {
-	python setup.py install || die "failed to build"
+	python setup.py install --root="${D}" || die "failed to build"
 }
 
