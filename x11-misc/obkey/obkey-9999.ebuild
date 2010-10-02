@@ -33,6 +33,6 @@ src_compile() {
 }
 
 src_install() {
-	python setyp.py install || die "failed to build"
+	python setup.py install || die "failed to build"
 }
 
