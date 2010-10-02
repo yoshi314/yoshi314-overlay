@@ -28,20 +28,11 @@ src_unpack() {
 	git_src_unpack
 }
 
-src_prepare() {
-	python_copy_sources
+src_compile() {
+	python setup.py build || die "failed to build"
 }
-
 
 src_install() {
-	python_src_install
-	python_clean_installation_image
+	python setyp.py install || die "failed to build"
 }
 
-pkg_postinst() {
-	python_mod_optimize gtk-2.0
-}
-
-pkg_postrm() {
-	python_mod_cleanup gtk-2.0
-}
