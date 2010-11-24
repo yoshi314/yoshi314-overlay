@@ -11,7 +11,7 @@ MY_P="${PN}_${MY_PV}"
 DESCRIPTION="Freespace2 SCP"
 HOMEPAGE="http://scp.indiegames.us/"
 
-SRC_URI="http://swc.fs2downloads.com/builds/${MY_P}.tgz"
+SRC_URI="http://swc.fs2downloads.com/builds/${MY_P}.tgz
 	videos? ( http://swc.fs2downloads.com/files/FS2OGGCutscenepack.vp )"
 
 S=${WORKDIR}/${MY_P}
