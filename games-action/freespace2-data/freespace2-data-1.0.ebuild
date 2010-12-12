@@ -1,6 +1,8 @@
 # Copyright 1999-2007 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+EAPI="2"
+
 inherit eutils games
 
 DESCRIPTION="Freespace 2 - This is the data portion of Freespace 2"
@@ -11,9 +13,11 @@ LICENSE="freespace2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 RESTRICT="strip"
-IUSE=""
+IUSE="yal"
 
-DEPEND="app-arch/unshield"
+DEPEND="app-arch/unshield
+	games-action/fs2_open[freespace2]
+	yal? ( games-action/fs2_launcher )"
 
 S=${WORKDIR}
 
@@ -22,7 +26,7 @@ dir=${GAMES_PREFIX_OPT}/freespace2
 Ddir=${D}/${dir}
 
 pkg_setup() {
-    games_pkg_setup
+	games_pkg_setup
 }
 
 src_install() {
@@ -35,7 +39,7 @@ src_install() {
 		do
 		unshield -g "$group" -L -j x ${CDROM_ROOT}/data1.cab;
 	done;
-	
+
 	insinto "${dir}"/data
 	doins */*.vp
 	insinto "${dir}"/data/players
@@ -65,9 +69,9 @@ src_install() {
 pkg_postinst() {
 	games_pkg_postinst
 
-	echo
-	elog "This is only the data portion of the game. You need to merge"
-	elog "games-action/fs2_open to play."
-	echo
+	# echo
+	# elog "This is only the data portion of the game. You need to merge"
+	# elog "games-action/fs2_open to play."
+	# echo
 }
 
