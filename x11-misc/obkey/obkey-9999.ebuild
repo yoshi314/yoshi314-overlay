@@ -7,8 +7,8 @@ PYTHON_DEPEND="2"
 SUPPORT_PYTHON_ABIS="1"
 RESTRICT_PYTHON_ABIS="2.5"
 
-#EGIT_REPO_URI="git://github.com/nsf/obkey.git"
-EGIT_REPO_URI="git://jiss.convex.ru/obkey.git"
+EGIT_REPO_URI="git://github.com/nsf/obkey.git"
+#EGIT_REPO_URI="git://jiss.convex.ru/obkey.git"
 
 inherit distutils eutils python git
 
