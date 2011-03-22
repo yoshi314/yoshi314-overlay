@@ -10,7 +10,7 @@ SRC_URI="http://grafx2.googlecode.com/files/${P}-src.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64"
 IUSE="ttf lua"
 
 DEPEND="media-libs/libsdl
