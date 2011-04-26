@@ -16,11 +16,11 @@ SLOT="0"
 
 KEYWORDS="~x86 ~amd64"
 
-IUSE="debug doxygen fakeroot"
+IUSE="debug doxygen"
 
 
 RDEPEND="app-arch/libarchive
-		net-libs/libfetch
+		net-libs/curl
 		fakeroot? ( sys-apps/fakeroot )
 		doxygen? ( app-doc/doxygen )"
 
@@ -37,7 +37,7 @@ RDEPEND=""
 S=${WORKDIR}/${P}
 
 src_compile() {
-	econf $(use_enable doxygen) $(use_enable debug) $(use_enable fakeroot) || die "econf failed"
+	econf $(use_enable doxygen) $(use_enable debug) || die "econf failed"
 	emake || die "emake failed"
 }
 

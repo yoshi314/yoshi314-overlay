@@ -23,7 +23,6 @@ S=${WORKDIR}/${P}
 
 src_install() {
 	wget http://www.archlinux.org/mirrorlist/i686/all/ -O mirrorlist
-#	wget http://repos.archlinux.org/viewvc.cgi/pacman-mirrorlist/trunk/mirrorlist?view=co -O mirrorlist
 	insinto /etc/pacman.d
 	doins mirrorlist 
 }
