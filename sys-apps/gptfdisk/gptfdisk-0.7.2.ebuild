@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs
 
 DESCRIPTION="gdisk - GPT partition table manipulator for Linux"
 HOMEPAGE="http://www.rodsbooks.com/gdisk/"
-SRC_URI="mirror://sourceforge/gptfdisk/${P}.tgz"
+SRC_URI="mirror://sourceforge/gptfdisk/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
