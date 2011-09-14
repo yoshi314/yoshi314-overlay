@@ -22,7 +22,7 @@ RDEPEND=""
 S=${WORKDIR}/${P}
 
 src_install() {
-	wget http://www.archlinux.org/mirrorlist/i686/all/ -O mirrorlist
+	wget https://www.archlinux.org/mirrorlist/all/ -O mirrorlist
 	insinto /etc/pacman.d
 	doins mirrorlist 
 }
