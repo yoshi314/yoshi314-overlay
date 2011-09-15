@@ -16,7 +16,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE="doc ruby-bindings python-bindings perl-bindings"
 
 DEPEND="dev-libs/check
-	doc? ( app-doc/doxygen )i
+	doc? ( app-doc/doxygen )
 	python-bindings? ( dev-lang/python dev-lang/swig )
 	ruby-bindings? ( dev-lang/ruby )
 	perl-bindings? ( dev-lang/perl )
