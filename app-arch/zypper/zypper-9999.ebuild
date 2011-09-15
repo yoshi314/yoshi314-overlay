@@ -18,7 +18,8 @@ IUSE=""
 DEPEND="app-admin/augeas
 	dev-libs/libzypp
 	sys-libs/readline
-	sys-devel/gettext"
+	sys-devel/gettext
+	app-arch/rpm[lua]"
 
 RDEPEND="${DEPEND}"
 
