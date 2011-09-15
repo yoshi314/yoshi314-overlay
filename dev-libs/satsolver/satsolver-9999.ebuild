@@ -25,8 +25,12 @@ DEPEND="dev-libs/check
 
 RDEPEND="${DEPEND}"
 
+CMAKE_BUILD_DIR="${WORKDIR}/${P}"
+
 src_prepare() {
 	epatch "$FILESDIR"/documentation.patch
+	#warnings as errors makes it fail. disable that option 
+	sed -i -e 's/-Werror//g' CMakeLists.txt
 }
 
 src_configure() {
@@ -38,4 +42,5 @@ src_configure() {
 		#this fixes rpm includes
 		-DFEDORA=1
 	)
+	cmake-utils_src_configure
 }
