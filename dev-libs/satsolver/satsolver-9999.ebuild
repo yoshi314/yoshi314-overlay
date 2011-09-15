@@ -8,7 +8,7 @@ inherit cmake-utils git
 
 DESCRIPTION="Library for resolution solving"
 HOMEPAGE="https://gitorious.org/opensuse/sat-solver"
-EGIT_REPO_URI="git://gitorious.org/opensuse/sat-solver.git"
+EGIT_REPO_URI="git://github.com/openSUSE/sat-solver.git"
 
 LICENSE="BSD"
 SLOT="0"
