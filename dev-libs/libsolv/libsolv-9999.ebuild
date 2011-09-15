@@ -14,13 +14,13 @@ EGIT_REPO_URI="https://github.com/openSUSE/libsolv.git"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="static perl python ruby"
+IUSE="static perl-bindings python-bindings ruby-bindings"
 
 DEPEND="dev-libs/expat
 	sys-libs/zlib
-	perl? ( dev-lang/perl )
-	python? ( dev-lang/python )
-	ruby? ( dev-lang/ruby )
+	perl-bindings? ( dev-lang/perl )
+	python-bindings? ( dev-lang/python dev-lang/swig )
+	ruby-bindings? ( dev-lang/ruby )
 	app-arch/rpm"
 
 RDEPEND="${DEPEND}"
