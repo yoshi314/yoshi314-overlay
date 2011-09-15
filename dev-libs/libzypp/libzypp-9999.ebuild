@@ -33,6 +33,7 @@ CMAKE_BUILD_DIR="${WORKDIR}/${P}"
 
 src_prepare() {
 	epatch "$FILESDIR"/cmakelists-libproxy-documentation.patch
+	epatch "$FILESDIR"/cpp.patch
 	#warnings as errors makes it fail. disable that option 
 	sed -i -e 's/-Werror//g' CMakeLists.txt
 }
