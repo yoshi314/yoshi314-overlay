@@ -10,7 +10,7 @@ RESTRICT_PYTHON_ABIS="2.5"
 EGIT_REPO_URI="git://github.com/nsf/obkey.git"
 #EGIT_REPO_URI="git://jiss.convex.ru/obkey.git"
 
-inherit distutils eutils python git
+inherit eutils python git
 
 DESCRIPTION="Openbox key shortcut configuration tool"
 HOMEPAGE="https://code.google.com/p/obkey/"
