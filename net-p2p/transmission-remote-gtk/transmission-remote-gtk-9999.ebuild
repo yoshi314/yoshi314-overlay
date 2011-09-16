@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit subversion
+inherit subversion eutils
 DESCRIPTION="GTK GUI for Transmission. Can be used to manage transmission on
 remote machines"
 HOMEPAGE="https://code.google.com/p/transmission-remote-gtk/"
@@ -24,4 +24,7 @@ RDEPEND="${DEPEND}"
 src_configure() {
 	./autogen.sh
 	econf "$(use_with geoip libgeoip)"
+}
+src_install() {
+	einstall
 }
