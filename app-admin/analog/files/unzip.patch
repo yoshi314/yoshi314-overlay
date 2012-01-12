@@ -1,0 +1,19 @@
+--- a/src/unzip/unzip.h 2004-12-19 14:51:32.000000000 +0100
++++ b/src/unzip/unzip.h 2012-01-11 18:00:25.988120225 +0100
+@@ -47,6 +47,15 @@
+ extern "C" {
+ #endif
+ 
++/* Work-around for NetBSD. Its zconf.h doesn't define OF(x) */
++#ifndef OF
++#ifdef __STDC__
++#define OF(x) x
++#else
++#define OF(x) ()
++#endif
++#endif
++
+ #ifndef _ZLIB_H
+ #include "../zlib/zlib.h"
+ #endif
+
