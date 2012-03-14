@@ -21,7 +21,8 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="dev-python/pygtk
-    dev-python/imaging"
+    dev-python/imaging
+	dev-python/python-distutils-extra"
 RDEPEND="${DEPEND}"
 
 src_unpack() {
