@@ -2,28 +2,34 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
-DESCRIPTION="Dex is a tool to manage and launch autostart entries."
+PYTHON_COMPAT=( python{3_1,3_2,3_3} )
+inherit eutils python-r1 git-2
 
+DESCRIPTION="DesktopEntry eXecution - tool to manage and launch autostart entries"
 HOMEPAGE="http://e-jc.de/"
-#SRC_URI=""
+SRC_URI="https://github.com/jceb/dex/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+
 EGIT_REPO_URI="git://github.com/jceb/dex.git"
 
-LICENSE="GPL-2"
+LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86 ~amd64-linux"
+
 IUSE=""
 
-DEPEND=">=dev-lang/python-3.0.0
-		virtual/python-argparse"
-RDEPEND="${DEPEND}"
+RDEPEND="${PYTHON_DEPS}
+    virtual/python-argparse[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}"
 
-
-inherit git-2
-
+src_prepare() {
+    epatch_user
+}
 
 src_install() {
-	dobin dex
-	dodoc README
+    dobin dex
+    python_replicate_script "${ED}/usr/bin/dex"
+    dodoc README
+    doman dex.1
 }
