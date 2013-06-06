@@ -5,10 +5,10 @@
 EAPI=4
 
 DESCRIPTION="Archlinux Helper Installation Scripts"
-HOMEPAGE="https://github.com/falconindy/arch-install-scripts"
-#SRC_URI=""
 
-EGIT_REPO_URI="git://github.com/falconindy/arch-install-scripts.git"
+HOMEPAGE="https://projects.archlinux.org/arch-install-scripts.git/"
+
+EGIT_REPO_URI="git://projects.archlinux.org/arch-install-scripts.git"
 
 LICENSE="GPL-2"
 SLOT="0"
