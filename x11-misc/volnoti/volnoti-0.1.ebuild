@@ -21,7 +21,7 @@ RDEPEND="sys-apps/dbus
          dev-libs/dbus-glib
          x11-libs/gtk+
          x11-libs/gdk-pixbuf"
-DEPEND="dev-util/pkgconfig"
+DEPEND="virtual/pkgconfig"
 
 S=${WORKDIR}/${MY_P}
 
