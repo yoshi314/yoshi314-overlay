@@ -4,12 +4,13 @@
 
 EAPI="2"
 
-inherit games cmake-utils eutils subversion
+inherit games cmake-utils eutils git-2
 
 DESCRIPTION="Enhanced OpenGL port of the official DOOM source code that also supports Heretic, Hexen, and Strife"
 HOMEPAGE="http://grafzahl.drdteam.org/"
 #SRC_URI="http://omploader.org/vNjdnZw/${P}.tar.bz2"
-ESVN_REPO_URI="http://mancubus.net/svn/hosted/gzdoom/trunk"
+#ESVN_REPO_URI="http://mancubus.net/svn/hosted/gzdoom/trunk"
+EGIT_REPO_URI="https://github.com/coelckers/gzdoom.git"
 
 SRC_URI="amd64? ( http://www.fmod.org/index.php/release/version/fmodapi42816linux64.tar.gz )
 x86? ( http://www.fmod.org/index.php/release/version/fmodapi42816linux.tar.gz )"
