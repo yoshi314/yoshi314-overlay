@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: /var/cvsroot/gentoo-x86/media-sound/volti/volnoti-0.1.ebuild $
 
-EAPI=4
+EAPI=5
 
 inherit toolchain-funcs
 
