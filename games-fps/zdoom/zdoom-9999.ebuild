@@ -1,0 +1,85 @@
+# Copyright 1999-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+# I originally swiped this from someone's bug
+# report, but I've chopped it to bits over time.
+EAPI="2"
+inherit games cmake-utils eutils git-2
+
+DESCRIPTION="Enhanced port of the official DOOM source code that also supports Heretic, Hexen, and Strife"
+HOMEPAGE="http://zdoom.org/"
+EGIT_REPO_URI="https://github.com/rheit/zdoom.git"
+
+LICENSE="DOOMLIC BUILDLIC BSD"
+SLOT="0"
+
+KEYWORDS=""
+IUSE="mmx gtk biostyle"
+RDEPEND="
+	mmx? ( || ( dev-lang/nasm dev-lang/yasm ) )
+	gtk? ( x11-libs/gtk+:2 )
+	media-libs/libsdl
+	media-libs/fmod:1
+	media-libs/flac
+	virtual/jpeg
+	media-sound/fluidsynth
+"
+
+ZDOOM_DIR="${GAMES_DATADIR}/${PN}"
+
+src_prepare() {
+	# Use default game data path.
+	einfo "Fixing the file path in src/sdl/i_system.h."
+	sed -ie "s:/usr/local/share/:${ZDOOM_DIR}/:" src/posix/i_system.h || die
+
+	# Apply Bio's config patch if desired.
+	if use biostyle; then
+		epatch ${FILESDIR}/${PN}-bioconfig.patch
+	fi
+}
+
+src_configure() {
+	local mycmakeargs=(
+		$(cmake-utils_use_no mmx ASM)
+		$(cmake-utils_use_no gtk GTK)
+		-DFMOD_INCLUDE_DIR=/opt/fmodex/api/inc/
+		-DFMOD_LIBRARY=/opt/fmodex/api/lib/libfmodex.so
+	)
+	cmake-utils_src_configure
+}
+
+src_install() {
+	# Does anyone really care about the docs?
+	dodoc docs/*.{txt,TXT} || die
+	dohtml docs/console*.{css,html} || die
+
+	# Binary.
+	cd "${CMAKE_BUILD_DIR}" || die
+	dogamesbin ${PN} || die
+
+	# Install zdoom.pk3.
+	insinto ${ZDOOM_DIR}
+	doins ${PN}.pk3 || die
+
+	# So make a desktop entry.
+	doicon ${FILESDIR}/${PN}.png
+	make_desktop_entry ${PN} "ZDoom"
+
+	prepgamesdirs
+}
+
+pkg_postinst() {
+	games_pkg_postinst
+
+	elog "Before you can play ${PN}, you must do one of the following:"
+	elog " - Copy or link IWAD files into ${ZDOOM_DIR}"
+	elog "    (The files must be readable by the 'games' group)."
+	elog " - Add your IWAD directory to your ~/.${PN}/${PN}.ini"
+	elog "    file in the [IWADSearch.Directories] section."
+	elog " - Start ${PN} with the -iwad <iwadpath> option."
+	elog " - Get ZDL. (games-util/zdl) ;)"
+	elog
+	elog "To play, run: \"${PN}\" (and add options and stuff)"
+}
+
