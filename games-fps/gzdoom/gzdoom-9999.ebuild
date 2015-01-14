@@ -1,29 +1,23 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="5"
 
-inherit games cmake-utils eutils git-2
+inherit games cmake-utils git-2 eutils
 
 DESCRIPTION="Enhanced OpenGL port of the official DOOM source code that also supports Heretic, Hexen, and Strife"
-HOMEPAGE="http://grafzahl.drdteam.org/"
-#SRC_URI="http://omploader.org/vNjdnZw/${P}.tar.bz2"
-#ESVN_REPO_URI="http://mancubus.net/svn/hosted/gzdoom/trunk"
+HOMEPAGE="http://www.osnanet.de/c.oelckers/gzdoom/index.html"
 EGIT_REPO_URI="https://github.com/coelckers/gzdoom.git"
-
-SRC_URI="amd64? ( http://www.fmod.org/index.php/release/version/fmodapi42816linux64.tar.gz )
-x86? ( http://www.fmod.org/index.php/release/version/fmodapi42816linux.tar.gz )"
-
-
 
 LICENSE="DOOMLIC BUILDLIC BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="mmx gtk fluidsynth"
 
-RDEPEND="gtk? ( x11-libs/gtk+:2 )
+RDEPEND="
 	fluidsynth? ( media-sound/fluidsynth )
+	gtk? ( x11-libs/gtk+:2 )
 	media-libs/flac
 	media-libs/fmod:1
 	virtual/glu
@@ -31,24 +25,16 @@ RDEPEND="gtk? ( x11-libs/gtk+:2 )
 	virtual/opengl
 	media-libs/libsdl"
 
-use amd64 && FMODURI="fmodapi42816linux64.tar.gz"
-use x86   && FMODURI="fmodapi42816linux.tar.gz"
-
-_fmodversion=4.28.16
-
-_fmodsuffix=""
-use amd64 && _fmodsuffix="64"
-
-DEPEND="${REPEND}
+DEPEND="${RDEPEND}
 	mmx? ( || ( dev-lang/nasm dev-lang/yasm ) )"
 
 src_prepare() {
-	# Use default game data path"
+	# Use default game data path
 	sed -i \
 		-e "s:/usr/local/share/:${GAMES_DATADIR}/doom-data/:" \
-		src/sdl/i_system.h || die
+		src/posix/i_system.h || die
 	epatch "${FILESDIR}/${PN}-respect-fluidsynth-useflag.patch"
-	tar xvzf ${DISTDIR}/${FMODURI} -C ${WORKDIR}
+#	epatch "${FILESDIR}/${P}-fix-new-fmod.patch"
 }
 
 src_configure() {
@@ -56,23 +42,22 @@ src_configure() {
 		$(cmake-utils_use_no mmx ASM)
 		$(cmake-utils_use_no gtk GTK)
 		$(cmake-utils_use_use fluidsynth FLUIDSYNTH)
-		-DFMOD_INCLUDE_DIR=${WORKDIR}/fmodapi${_fmodversion//./}linux${_fmodsuffix}/api/inc
-		-DFMOD_LIBRARY=${WORKDIR}/fmodapi${_fmodversion//./}linux${_fmodsuffix}/api/lib/libfmodex${_fmodsuffix}-${_fmodversion}.so
+		-DFMOD_INCLUDE_DIR=/opt/fmodex/api/inc/
+		-DFMOD_LIBRARY=/opt/fmodex/api/lib/libfmodex.so
 	)
 
 	cmake-utils_src_configure
 }
 
 src_install() {
-	dodoc docs/*.{txt,TXT} || die
-	dohtml docs/console*.{css,html} || die
+	dodoc docs/*.{txt,TXT}
+	dohtml docs/console*.{css,html}
 
 	cd "${CMAKE_BUILD_DIR}" || die
 	dogamesbin ${PN} || die
-	dogameslib ${WORKDIR}/fmodapi${_fmodversion//./}linux${_fmodsuffix}/api/lib/libfmodex${_fmodsuffix}-${_fmodversion}.so
 
 	insinto "${GAMES_DATADIR}/doom-data"
-	doins ${PN}.pk3 || die
+	doins ${PN}.pk3
 
 	prepgamesdirs
 }
@@ -90,5 +75,5 @@ pkg_postinst() {
 		ewarn "You may need to install media-sound/fluid-soundfont"
 		ewarn "for fluidsynth to play music, depending on your sound card."
 	fi
-	elog "See /usr/share/doc/${P}/zdoom.txt.bz2 for more info"
+	elog "See /usr/share/doc/${P}/zdoom.txt.* for more info"
 }
