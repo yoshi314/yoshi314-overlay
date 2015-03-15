@@ -1,0 +1,12 @@
+index 2d18ac6..3ce891d 100644
+--- src/main.cpp
++++ src/main.cpp
+@@ -220,7 +220,7 @@ std::string find_datadir()
+     {
+       std::string prefix = c_prefix;
+       free(c_prefix);
+-      return prefix + "/data/";
++      return "/usr/share/jstest-gtk/";
+     }
+   }
+ }
