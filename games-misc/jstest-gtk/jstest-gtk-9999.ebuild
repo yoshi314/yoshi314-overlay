@@ -22,19 +22,21 @@ DEPEND="dev-util/scons
 
 RDEPEND="${DEPEND}"
 
-inherit git-2
+inherit git-2 scons-utils eutils
 
-src_compile() {
-	sed -i -e 's|data/generic.png|/usr/share/jstest-gtk/generic.png|' src/joystick_list_widget.cpp
-	scons  || die "Fail"
+src_prepare() {
+    epatch  ${FILESDIR}/datadir.patch
 }
 
-src_install()	{
+src_compile() {
+	escons
+}
 
-dobin jstest-gtk
-dodoc COPYING NEWS README
-insinto /usr/share/jstest-gtk
-doins data/*.{png,xml}
-doman data/jstest-gtk.1
+src_install() {
+    dobin jstest-gtk
+    dodoc COPYING NEWS README.md
+    insinto /usr/share/jstest-gtk
+    doins data/*.{png,xml}
+    doman data/jstest-gtk.1
 }
 
