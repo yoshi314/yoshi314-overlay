@@ -20,6 +20,7 @@ DEPEND="media-libs/freetype:2
 	>=media-libs/libsdl-1.2[joystick,opengl,X]
 	media-libs/openal
 	media-libs/libpng
+	media-libs/libmpeg2
 	dev-libs/glib:2
 	sys-libs/zlib
 	x11-apps/xinput"
