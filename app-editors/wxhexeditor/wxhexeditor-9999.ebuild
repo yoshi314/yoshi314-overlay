@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+
+EAPI=5
 inherit autotools wxwidgets subversion eutils
 
 ESVN_REPO_URI="https://wxhexeditor.svn.sourceforge.net/svnroot/wxhexeditor/trunk"
@@ -18,9 +20,9 @@ RDEPEND="=x11-libs/wxGTK-${WX_GTK_VER}*"
 DEPEND="${RDEPEND}"
 
 src_compile() {
-    emake || die "emake failed"
+    make || die "emake failed"
 }
 
 src_install() {
-make DESTDIR="${D}" install || die "make install failed "
+    make DESTDIR="${D}" install || die "make install failed "
 }
