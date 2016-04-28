@@ -5,7 +5,7 @@
 
 EAPI=5
 inherit autotools wxwidgets subversion eutils
-
+EAPI=4
 ESVN_REPO_URI="https://wxhexeditor.svn.sourceforge.net/svnroot/wxhexeditor/trunk"
 
 WX_GTK_VER="2.8"

@@ -10,7 +10,7 @@ DESCRIPTION="# Copyright 1999-2015 Gentoo Foundation
 
 EAPI=5
 
-DESCRIPTION="Lightweight GTK+ clipboard manager (fork of Parcellite)"
+DESCRIPTION="Lightweight GTK+ clipboard manager"
 HOMEPAGE="http://gtkclipit.sourceforge.net"
 SRC_URI="https://github.com/downloads/shantzu/ClipIt/${P}.tar.gz"
 
