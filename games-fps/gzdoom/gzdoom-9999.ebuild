@@ -44,7 +44,7 @@ src_configure() {
 
 src_install() {
 	# Does anyone really care about the docs?
-	dodoc docs/*.{txt,TXT} || die
+	dodoc docs/*.txt || die
 	dohtml docs/console*.{css,html} || die
 
 	# Binary.
