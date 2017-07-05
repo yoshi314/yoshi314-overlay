@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="5"
 inherit eutils games cmake-utils git-2
 
 DESCRIPTION="Enhanced OpenGL port of the official DOOM source code that also supports Heretic, Hexen, and Strife"
@@ -29,7 +29,7 @@ ZDOOM_DIR="${GAMES_DATADIR}/${PN}"
 src_prepare() {
 	# Use default game data path.
 	einfo "Fixing the file path in src/sdl/i_system.h."
-	sed -ie "s:/usr/local/share/:${ZDOOM_DIR}/:" src/posix/i_system.h || die
+	sed -ie "s:/usr/local/share/:${ZDOOM_DIR}/:" src/posix/i_system.h 
 }
 
 src_configure() {
@@ -44,16 +44,16 @@ src_configure() {
 
 src_install() {
 	# Does anyone really care about the docs?
-	dodoc docs/*.txt || die
-	dohtml docs/console*.{css,html} || die
+	dodoc docs/*.txt 
+	dohtml docs/console*.{css,html} 
 
 	# Binary.
-	cd "${CMAKE_BUILD_DIR}" || die
-	dogamesbin ${PN} || die
+	cd "${CMAKE_BUILD_DIR}" 
+	dogamesbin ${PN} 
 
 	# Install zdoom.pk3.
 	insinto ${ZDOOM_DIR}
-	doins ${PN}.pk3 || die
+	doins ${PN}.pk3 
 
 	# So make a desktop entry.
 	doicon ${FILESDIR}/${PN}.png
