@@ -42,6 +42,9 @@ sed -i \
 # except for one entry for USE_PASSWORD_FILE
 #	epatch "${FILESDIR}"/homedir_0.patch
 
+	#patch for newer maps
+	epatch "${FILESDIR}"/admod.patch
+
 	sed -i -e \
 		"s!parms.basedir = \".\"!parms.basedir = \"${GAMES_DATADIR}/quake1\"!" \
 		main_sdl.c || die "sed failed"
