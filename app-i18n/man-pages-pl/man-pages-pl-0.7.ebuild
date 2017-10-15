@@ -1,7 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="A collection of Polish translations of Linux manual pages"
 HOMEPAGE="https://sourceforge.net/projects/manpages-pl/"
@@ -16,7 +16,7 @@ DOCS=( AUTHORS README )
 S="${WORKDIR}/manpages-pl-${PV}"
 
 src_prepare() {
-	epatch_user
+	default
 	#mans provided by other packages
 	mans="generated/man1/groups.1 po/man1/groups.1.po"
 
