@@ -18,7 +18,6 @@ RDEPEND="
 	mmx? ( || ( dev-lang/nasm dev-lang/yasm ) )
 	gtk? ( x11-libs/gtk+:2 )
 	media-libs/libsdl
-	media-libs/fmod:1
 	media-libs/flac
 	virtual/jpeg
 	media-sound/fluidsynth
@@ -36,8 +35,6 @@ src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_no mmx ASM)
 		$(cmake-utils_use_no gtk GTK)
-		-DFMOD_INCLUDE_DIR=/opt/fmodex/api/inc/
-		-DFMOD_LIBRARY=/opt/fmodex/api/lib/libfmodex.so
 	)
 	cmake-utils_src_configure
 }
