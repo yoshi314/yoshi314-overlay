@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit autotools ltprune versionator git-r3
+inherit autotools ltprune versionator git-r3 cmake-utils
 
 DESCRIPTION="PCSX-Reloaded: a fork of PCSX, the discontinued Playstation emulator, with PXGP modification"
-HOMEPAGE="https://github.com/loathingKernel/pcsxr/"
+HOMEPAGE="https://github.com/iCatButler/pcsxr"
 
-EGIT_REPO_URI="https://github.com/loathingKernel/pcsxr/"
-EGIT_BRANCH="fix-linux-build"
+EGIT_REPO_URI="https://github.com/iCatButler/pcsxr"
+#EGIT_BRANCH="fix-linux-build"
 
 LICENSE="GPL-2 public-domain"
 SLOT="0"

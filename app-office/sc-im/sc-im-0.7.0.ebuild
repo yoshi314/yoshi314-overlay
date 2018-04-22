@@ -23,5 +23,7 @@ RDEPEND="${DEPEND}"
 S=${WORKDIR}/${P}/src
 
 src_install() {
-	emake prefix=${D} install
+	emake prefix=/usr DESTDIR=${D} HELPDIR=/usr/share/doc/${P} install
+#	dodir ${D}/usr/share/doc/${P}
+	dodoc doc
 }
