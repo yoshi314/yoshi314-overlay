@@ -2,8 +2,14 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>yoshi314@gmail.com</email>
+		<email>yoshi3@autograf.pl</email>
+		<name>Marcin Kowalski</name>
 	</maintainer>
-	<longdescription lang="en">A collection of man pages, in Polish language
-	</longdescription>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="sourceforge">manpages-pl</remote-id>
+	</upstream>
 </pkgmetadata>
