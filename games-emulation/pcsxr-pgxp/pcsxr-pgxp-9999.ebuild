@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit autotools ltprune versionator git-r3 cmake-utils
+inherit ltprune versionator git-r3 cmake-utils gnome2-utils
 
 DESCRIPTION="PCSX-Reloaded: a fork of PCSX, the discontinued Playstation emulator, with PXGP modification"
 HOMEPAGE="https://github.com/iCatButler/pcsxr"
@@ -14,29 +14,19 @@ LICENSE="GPL-2 public-domain"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="alsa cdio ffmpeg libav nls openal opengl oss pulseaudio +sdl"
-REQUIRED_USE="?? ( alsa openal oss pulseaudio sdl )"
+IUSE="sio1 opengl nls joystick x86"
 
 RDEPEND="
 	dev-libs/glib:2=
-	media-libs/libsdl:0=[joystick]
+	media-libs/libsdl2:0=[joystick]
 	sys-libs/zlib:0=
 	x11-libs/gtk+:3=
 	x11-libs/libX11:0=
 	x11-libs/libXext:0=
 	x11-libs/libXtst:0=
 	x11-libs/libXv:0=
-	alsa? ( media-libs/alsa-lib:0= )
-	cdio? ( dev-libs/libcdio:0= )
-	ffmpeg? (
-		!libav? ( >=media-video/ffmpeg-3:0= )
-		libav? ( media-video/libav:0= ) )
-	nls? ( virtual/libintl:0= )
-	openal? ( media-libs/openal:0= )
 	opengl? ( virtual/opengl:0=
 		x11-libs/libXxf86vm:0= )
-	pulseaudio? ( media-sound/pulseaudio:0= )
-	sdl? ( media-libs/libsdl2:0=[sound] )
 "
 DEPEND="${RDEPEND}
 	app-arch/unzip
@@ -47,61 +37,24 @@ DEPEND="${RDEPEND}
 	!games-emulation/pcsxr
 "
 
-# it's only the .po file check that fails :)
-RESTRICT=test
-
-#	"${FILESDIR}"/${P}-disable-sdl2.patch
-#	"${FILESDIR}"/${P}-ffmpeg3.patch
-
-
-#PATCHES=(
-#	"${FILESDIR}"/${P}-zlib-uncompress2.patch
-#)
-
-#S="${WORKDIR}/${PN}"
-
-src_prepare() {
-	./autogen.sh
-	default
-#	eautoreconf
-}
 
 src_configure() {
-	local sound_backend
-
-	if use alsa; then
-		sound_backend=alsa
-	elif use oss; then
-		sound_backend=oss
-	elif use pulseaudio; then
-		sound_backend=pulseaudio
-	elif use sdl; then
-		sound_backend=sdl
-	elif use openal; then
-		sound_backend=openal
-	else
-		sound_backend=null
-	fi
-
 	local myconf=(
-		$(use_enable nls)
-		$(use_enable cdio libcdio)
-		$(use_enable opengl)
-		$(use_enable ffmpeg ccdda)
-		--enable-sound=${sound_backend}
+		$(use_enable sio1 BUILD_SIO1)
+		$(use_enable opengl BUILD_OPENGL)
 	)
-
-	econf "${myconf[@]}"
+	cmake-utils_src_configure $myconf
 }
 
 src_install() {
-	default
+	cmake-utils_src_install
 	prune_libtool_files --all
 
 	dodoc doc/{keys,tweaks}.txt
 }
 
 pkg_postinst() {
+	gnome2_icon_cache_update
 	local vr
 	for vr in ${REPLACING_VERSIONS}; do
 		if ! version_is_at_least 1.9.94-r1 ${vr}; then
