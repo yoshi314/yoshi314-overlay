@@ -18,7 +18,7 @@ IUSE="sio1 opengl nls joystick x86"
 
 RDEPEND="
 	dev-libs/glib:2=
-	media-libs/libsdl2:0=[joystick]
+	media-libs/libsdl2:0=[joystick?]
 	sys-libs/zlib:0=
 	x11-libs/gtk+:3=
 	x11-libs/libX11:0=
