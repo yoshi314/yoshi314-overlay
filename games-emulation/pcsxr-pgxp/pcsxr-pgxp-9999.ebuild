@@ -29,7 +29,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	app-arch/unzip
 	dev-util/intltool
-	x11-proto/videoproto
+	x11-base/xorg-proto
 	nls? ( sys-devel/gettext:0 )
 	x86? ( dev-lang/nasm )
 	!games-emulation/pcsxr
