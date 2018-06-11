@@ -5,8 +5,8 @@
 EAPI=2
 
 DESCRIPTION="A pixelart-oriented painting program"
-HOMEPAGE="http://code.google.com/p/grafx2/"
-SRC_URI="http://grafx2.googlecode.com/files/${P}-src.tgz"
+HOMEPAGE="http://grafx2.chez.com/"
+SRC_URI="http://pulkomandy.tk/projects/GrafX2/downloads/${P}-src.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
