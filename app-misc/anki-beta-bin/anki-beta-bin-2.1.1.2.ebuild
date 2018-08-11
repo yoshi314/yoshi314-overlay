@@ -47,6 +47,5 @@ pkg_postinst() {
 }
 
 pkg_prerm() { 
-	xdg-mime uninstall ${PREFIX}/share/anki/anki.xml
-	xdg_desktop_database_update
+	xdg-mime uninstall /usr/share/anki/anki.xml
 }

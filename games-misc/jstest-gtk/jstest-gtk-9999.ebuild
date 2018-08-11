@@ -24,16 +24,8 @@ RDEPEND="${DEPEND}"
 
 inherit git-2 cmake-utils eutils
 
-src_prepare() {
-    epatch  ${FILESDIR}/datadir.patch
-}
+#src_prepare() {
+#    epatch  ${FILESDIR}/datadir.patch
+#}
 
-
-src_install() {
-    dobin ${BUILD_DIR}/jstest-gtk
-    dodoc COPYING NEWS README.md
-    insinto /usr/share/jstest-gtk
-    doins data/*.{png,xml}
-    doman data/jstest-gtk.1
-}
 
