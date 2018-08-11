@@ -59,9 +59,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
 	opengl? ( virtual/glu[${MULTILIB_USEDEP}] )
 	X?  (
-		x11-proto/xproto[${MULTILIB_USEDEP}]
-		x11-proto/xineramaproto[${MULTILIB_USEDEP}]
-		x11-proto/xf86vidmodeproto[${MULTILIB_USEDEP}]
+		x11-base/xorg-proto[${MULTILIB_USEDEP}]
 	)"
 
 PDEPEND=">=app-eselect/eselect-wxwidgets-20131230"
