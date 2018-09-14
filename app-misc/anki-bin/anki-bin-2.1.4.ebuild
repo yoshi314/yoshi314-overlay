@@ -19,7 +19,7 @@ KEYWORDS="-* ~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="!app-misc/anki"
+RDEPEND="!app-misc/anki !app-misc/anki-beta-bin"
 
 
 S="${WORKDIR}/anki-${MY_VER}-linux-amd64"
