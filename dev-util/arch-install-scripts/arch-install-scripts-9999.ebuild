@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="sys-apps/pacman"
-RDEPEND="${DEPEND}"
+RDEPEND="sys-apps/pacman"
 
 inherit git-2
 
