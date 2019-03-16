@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd @PATH@
+
+export PYTHONPATH=@PATH@/lib/python2.7 
+export QT_QPA_PLATFORM_PLUGIN_PATH=@PATH@/lib/qt_plugins
+export LD_LIBRARY_PATH=@PATH@/lib:$LD_LIBRARY_PATH 
+
+@PATH@/bin/calibre
