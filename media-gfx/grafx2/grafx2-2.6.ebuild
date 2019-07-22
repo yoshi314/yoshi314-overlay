@@ -6,19 +6,22 @@ EAPI=2
 
 DESCRIPTION="A pixelart-oriented painting program"
 HOMEPAGE="http://grafx2.chez.com/"
-SRC_URI="http://pulkomandy.tk/projects/GrafX2/downloads/${P}-src.tgz"
+SRC_URI="https://gitlab.com/GrafX2/grafX2/-/archive/v${PV}/grafX2-v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86"
-IUSE="ttf lua"
+IUSE="ttf lua sdl2"
 
-DEPEND="media-libs/libsdl
-	media-libs/sdl-image
-	media-libs/freetype
+DEPEND="media-libs/freetype
 	media-libs/libpng
 	ttf? ( media-libs/sdl-ttf )
-	lua? ( >=dev-lang/lua-5.1.0 )"
+	lua? ( >=dev-lang/lua-5.1.0 )
+	sdl2? ( media-libs/libsdl2 
+	media-libs/sdl2-image )
+	!sdl2? ( media-libs/libsdl 
+	media-libs/sdl-image )"
+
 RDEPEND=""
 
 src_prepare() {
@@ -28,7 +31,8 @@ src_prepare() {
 src_compile() {
 	use ttf || MYCNF="NOTTF=1"
 	use lua || MYCNF="${MYCNF} NOLUA=1"
-	cd ${WORKDIR}/${PN}/src/
+	use sdl2 && MYCNF="${MYCNF} API=sdl2"
+	cd ${WORKDIR}/grafX2-v${PV}
 	emake ${MYCNF} prefix=/usr || die "emake failed"
 }
 
@@ -39,5 +43,5 @@ src_install() {
 
 pkg_postinst() {
 	elog "Please report bugs upstream:"
-	elog " http://code.google.com/p/grafx2"
+	elog "http://grafx2.chez.com/"
 }
