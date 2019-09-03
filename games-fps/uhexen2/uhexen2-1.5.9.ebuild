@@ -8,7 +8,7 @@ inherit eutils flag-o-matic toolchain-funcs versionator games
 
 MY_PN="hexen2"
 MY_PV=$(replace_version_separator 3 '-')
-DATA_PV="1.28"
+DATA_PV="1.29b"
 DEMO_PV="1.11"
 HW_PV="0.15"
 LIT_PV="20140628"
@@ -66,7 +66,6 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/${MY_PN}source-${MY_PV}
 dir=${GAMES_DATADIR}/${MY_PN}
-use demo && dir=${GAMES_DATADIR}/${MY_PN}/demo
 
 yesno() {
 	local yesno="yes"
@@ -79,29 +78,31 @@ pkg_setup() {
 }
 
 src_prepare() {
+	use demo && dir=${GAMES_DATADIR}/${MY_PN}/demo
 	gl=""
 
 	if use opengl ; then
 		gl="gl"
 		sed -i \
 			-e "/BIN_OGL_PREFIX/s:\"gl\":\"\":" \
-			launcher/games.h					|| die "sed games.h failed"
+			launcher/games.h					
 	fi
 
 	sed -i \
 		-e "/GAME_DATADIR/s:\".*\":\"${dir}\":" \
-		launcher/games.h						|| die "sed games.h failed"
+		launcher/games.h					
 
 	sed -i \
 		-e "/desired_speed/s:= [0-9]*;:= 44100;:" \
-		engine/h2shared/snd_dma.c					|| die "sed snd_dma.c failed"
+		engine/h2shared/snd_dma.c		
 
 	sed -i \
 		-e "/parms.basedir/s:cwd:\"${dir}\":" \
-		engine/{hexen2{,/server},hexenworld/{client,server}}/sys_unix.c	|| die "sed sys_unix.c failed"
+		engine/{hexen2{,/server},hexenworld/{client,server}}/sys_unix.c	
 }
 
 src_compile() {
+	use demo && dir=${GAMES_DATADIR}/${MY_PN}/demo
 	local g_opts=""
 
 	use debug	&& g_opts+=" DEBUG=1"
@@ -136,7 +137,7 @@ src_compile() {
 			${g_opts} \
 			${c_opts} \
 			CPUFLAGS="${CFLAGS} -ffast-math" \
-			${gl}h2							|| die "emake Hexen II (${gl}h2) failed"
+			${gl}h2							
 
 		if use gtk ; then
 			cd ${S}/launcher
@@ -145,7 +146,7 @@ src_compile() {
 			emake clean
 			emake \
 				${g_opts} \
-				CPUFLAGS="${CFLAGS} -ffast-math"		|| die "emake launcher failed"
+				CPUFLAGS="${CFLAGS} -ffast-math"
 		fi
 
 		if use hexenworld ; then
@@ -156,7 +157,7 @@ src_compile() {
 			emake \
 				${g_opts} \
 				CPUFLAGS="${CFLAGS} -ffast-math" \
-				-C server					|| die "emake HexenWorld Server failed"
+				-C server				
 
 			einfo "\nBuilding Hexenworld client(s)"
 
@@ -166,7 +167,7 @@ src_compile() {
 				${c_opts} \
 				CPUFLAGS="${CFLAGS} -ffast-math" \
 				${gl}hw \
-				-C client 					|| die "emake Hexenworld Client (${gl}hw) failed"
+				-C client 		
 		fi
 	fi
 
@@ -178,7 +179,7 @@ src_compile() {
 		emake \
 			${g_opts} \
 			CPUFLAGS="${CFLAGS} -ffast-math" \
-			-C server						|| die "emake Dedicated server failed"
+			-C server					
 	fi
 
 	if use tools ; then
@@ -191,7 +192,7 @@ src_compile() {
 			emake \
 				${g_opts} \
 				CPUFLAGS="${CFLAGS} -ffast-math" \
-				-C ${x}						|| die "emake ${x} failed"
+				-C ${x}					
 		done
 
 		if use hexenworld ; then
@@ -204,7 +205,7 @@ src_compile() {
 				emake \
 					${g_opts} \
 					CPUFLAGS="${CFLAGS} -ffast-math" \
-					-C ${x}					|| die "emake ${x} failed"
+					-C ${x}				
 			done
 		fi
 	fi
@@ -213,26 +214,26 @@ src_compile() {
 src_install() {
 	if use demo ; then
 		insinto "${dir}"/data1/maps
-		doins ${WORKDIR}/data1/maps/demo*				|| die "doins maps/demo* failed"
+		doins ${WORKDIR}/data1/maps/demo*			
 		rm -rf ${WORKDIR}/data1/maps
 	else
 		insinto "${dir}"
-		doins -r ${WORKDIR}/portals					|| die "doins portals failed"
+		doins -r ${WORKDIR}/portals				
 		rm -f ${WORKDIR}/data1/maps/demo*
 	fi
 
 	insinto "${dir}"
-	doins -r ${WORKDIR}/data1						|| die "doins data1 failed"
+	doins -r ${WORKDIR}/data1					
 
-	dodoc docs/README{,.hwcl,.hwmaster,.hwsv,.music}			|| die "dodoc failed"
+	dodoc docs/README{,.hwcl,.hwmaster,.hwsv,.music}		
 
 	if use client ; then
-		newgamesbin engine/hexen2/${gl}hexen2 ${MY_PN}			|| die "newgamesbin ${gl}hexen2 failed"
-		newicon engine/resource/hexen2n.png ${MY_PN}.png		|| die "newicon hexen2n.png failed"
+		newgamesbin engine/hexen2/${gl}hexen2 ${MY_PN}		
+		newicon engine/resource/hexen2n.png ${MY_PN}.png	
 		make_desktop_entry ${MY_PN} "Hexen II" ${MY_PN}
 
 		if use gtk ; then
-			newgamesbin launcher/h2launcher ${MY_PN}-launcher	|| die "newgamesbin h2launcher failed"
+			newgamesbin launcher/h2launcher ${MY_PN}-launcher
 			make_desktop_entry ${MY_PN}-launcher "Hexen II Launcher" ${MY_PN}
 		fi
 
@@ -242,52 +243,52 @@ src_install() {
 			insinto "${dir}"
 			doins -r ${WORKDIR}/hw
 
-			newgamesbin engine/hexenworld/server/hwsv hwsv		|| die "newgamesbin hwsv failed"
-			newgamesbin engine/hexenworld/client/${gl}hwcl hwcl	|| die "newgamesbin ${gl}hwcl failed"
+			newgamesbin engine/hexenworld/server/hwsv hwsv	
+			newgamesbin engine/hexenworld/client/${gl}hwcl hwcl	
 
-			doicon engine/resource/hexenworld.png			|| die "doicon hexenworld.png failed"
+			doicon engine/resource/hexenworld.png		
 			make_desktop_entry hwcl "Hexen II Hexenworld Client" hexenworld
 		fi
 	fi
 
 	if use dedicated ; then
 		insinto "${dir}"/data1
-		doins -r ${WORKDIR}/siege/server.cfg				|| die "doins server.cfg failed"
+		doins -r ${WORKDIR}/siege/server.cfg			
 
-		newgamesbin engine/hexen2/server/h2ded ${MY_PN}-ded		|| die "newgamesbin h2ded failed"
+		newgamesbin engine/hexen2/server/h2ded ${MY_PN}-ded	
 	fi
 
 	if use tools ; then
-		dobin utils/bspinfo/bspinfo					|| die "dobin bspinfo failed"
-		dobin utils/dcc/dhcc						|| die "dobin dhcc failed"
-		dobin utils/genmodel/genmodel					|| die "dobin genmodel failed"
-		dobin utils/hcc/hcc						|| die "dobin hcc failed"
-		dobin utils/jsh2color/jsh2colour				|| die "dobin jsh2colour failed"
-		dobin utils/light/light						|| die "dobin light failed"
-		dobin utils/pak/paklist						|| die "dobin paklist failed"
-		dobin utils/pak/pakx						|| die "dobin pakx failed"
-		dobin utils/qbsp/qbsp						|| die "dobin qbsp failed"
-		dobin utils/qfiles/qfiles					|| die "dobin qfiles failed"
-		dobin utils/texutils/lmp2pcx/lmp2pcx				|| die "dobin lmp2pcx failed"
-		dobin utils/texutils/bsp2wal/bsp2wal				|| die "dobin bsp2wal failed"
-		dobin utils/vis/vis						|| die "dobin vis failed"
+		dobin utils/bspinfo/bspinfo				
+		dobin utils/dcc/dhcc					
+		dobin utils/genmodel/genmodel				
+		dobin utils/hcc/hcc					
+		dobin utils/jsh2color/jsh2colour			
+		dobin utils/light/light						
+		dobin utils/pak/paklist					
+		dobin utils/pak/pakx				
+		dobin utils/qbsp/qbsp			
+		dobin utils/qfiles/qfiles	
+		dobin utils/texutils/lmp2pcx/lmp2pcx
+		dobin utils/texutils/bsp2wal/bsp2wal
+		dobin utils/vis/vis				
 
 		docinto utils
-		dodoc utils/README						|| die "dodoc README failed"
-		dodoc utils/dcc/dcc.txt						|| die "dodoc dcc.txt failed"
-		newdoc utils/dcc/README README.dcc				|| die "newdoc README.dcc failed"
-		newdoc utils/hcc/README README.hcc				|| die "newdoc README.hcc failed"
-		newdoc utils/jsh2color/README README.jsh2color			|| die "newdoc README.jsh2color failed"
-		newdoc utils/jsh2color/ChangeLog ChangeLog.jsh2color		|| die "newdoc Changelog.jsh2color failed"
+		dodoc utils/README			
+		dodoc utils/dcc/dcc.txt	
+		newdoc utils/dcc/README README.dcc		
+		newdoc utils/hcc/README README.hcc	
+		newdoc utils/jsh2color/README README.jsh2color	
+		newdoc utils/jsh2color/ChangeLog ChangeLog.jsh2color
 
 		if use hexenworld ; then
-			dobin hw_utils/hwmaster/hwmaster			|| die "dobin hwmaster failed"
-			dobin hw_utils/hwmquery/hwmquery			|| die "dobin hwmquery failed"
-			dobin hw_utils/hwrcon/{hwrcon,hwterm}			|| die "dobin hwrcon/hwterm failed"
+			dobin hw_utils/hwmaster/hwmaster
+			dobin hw_utils/hwmquery/hwmquery
+			dobin hw_utils/hwrcon/{hwrcon,hwterm}	
 
 			docinto utils
-			dodoc hw_utils/hwmquery/hwmquery.txt			|| die "dodoc hwmquery.txt failed"
-			dodoc hw_utils/hwrcon/{hwrcon,hwterm}.txt		|| die "dodoc hwrcon/hwterm.txt failed"
+			dodoc hw_utils/hwmquery/hwmquery.txt
+			dodoc hw_utils/hwrcon/{hwrcon,hwterm}.txt
 		fi
 	fi
 
