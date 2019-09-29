@@ -50,7 +50,8 @@ src_install() {
 
 	# Install zdoom.pk3.
 	insinto ${ZDOOM_DIR}
-	doins ${PN}.pk3 
+	#doins ${PN}.pk3 
+	doins *.pk3 
 
 	# So make a desktop entry.
 	doicon ${FILESDIR}/${PN}.png
