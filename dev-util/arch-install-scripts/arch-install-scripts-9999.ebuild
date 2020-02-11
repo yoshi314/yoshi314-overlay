@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="sys-apps/pacman"
 
-inherit git-2
+inherit git-r3
 
 src_compile() {
 	emake  || die "Fail"
