@@ -22,7 +22,7 @@ DEPEND="dev-util/cmake
 
 RDEPEND="${DEPEND}"
 
-inherit git-2 cmake-utils eutils
+inherit git-r3 cmake-utils eutils
 
 #src_prepare() {
 #    epatch  ${FILESDIR}/datadir.patch
