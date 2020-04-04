@@ -14,6 +14,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="mmx gtk"
 
+
+DEPEND="dev-libs/zmusic"
+
 RDEPEND="
 	mmx? ( || ( dev-lang/nasm dev-lang/yasm ) )
 	gtk? ( x11-libs/gtk+:2 )
