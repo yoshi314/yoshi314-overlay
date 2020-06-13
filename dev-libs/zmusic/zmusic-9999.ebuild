@@ -21,9 +21,9 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 
-PATCHES=(
-	"${FILESDIR}/cmake_install.patch"
-)
+#PATCHES=(
+#	"${FILESDIR}/cmake_install.patch"
+#)
 
 src_configure() {
 	cmake-multilib_src_configure -DLIB_INSTALL_PATH=${get_libdir}
