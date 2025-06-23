@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="5"
-inherit eutils games cmake-utils git-r3
+EAPI=7
+inherit cmake git-r3
 
 DESCRIPTION="Enhanced OpenGL port of the official DOOM source code that also supports Heretic, Hexen, and Strife"
 HOMEPAGE="http://grafzahl.drdteam.org/"

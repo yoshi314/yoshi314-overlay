@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=8
 
 DESCRIPTION="XBPS is a package manager for Void Linux"
 HOMEPAGE="http://www.voidlinux.org"
 SRC_URI="https://github.com/void-linux/xbps/archive/${PV}.tar.gz"
 
-inherit eutils autotools-utils autotools
+inherit autotools
 
 
 LICENSE="GPL-2"
@@ -30,14 +30,13 @@ src_configure() {
 		$(use_enable static-utils static)
 	)
 
-	autotools-utils_src_configure
 
 }
 
-src_compile() {
-	autotools-utils_src_compile
-}
-
-src_install() {
-	autotools-utils_src_install
-}
+#src_compile() {
+#	autotools-utils_src_compile
+#}
+#
+#src_install() {
+#	autotools-utils_src_install
+#}
