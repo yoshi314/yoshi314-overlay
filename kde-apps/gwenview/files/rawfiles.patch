@@ -1,0 +1,28 @@
+--- a/lib/document/loadingdocumentimpl.cpp.orig	2024-06-11 10:40:40.426948486 +0200
++++ b/lib/document/loadingdocumentimpl.cpp	2024-06-11 11:10:18.178817338 +0200
+@@ -196,15 +196,10 @@
+         QImageReader reader;
+ 
+ #ifdef KDCRAW_FOUND
+-        if (!QImageReader::supportedImageFormats().contains(QByteArray("raw"))
+-            && KDcrawIface::KDcraw::rawFilesList().contains(QString::fromLatin1(mFormatHint))) {
++        if (KDcrawIface::KDcraw::rawFilesList().contains(QString::fromLatin1(mFormatHint))) {
+             QByteArray previewData;
+ 
+-            // if the image is in format supported by dcraw, fetch its embedded preview
+-            mJpegContent = std::make_unique<JpegContent>();
+-
+             // use KDcraw for getting the embedded preview
+-            // KDcraw functionality cloned locally (temp. solution)
+             bool ret = KDcrawIface::KDcraw::loadEmbeddedPreview(previewData, buffer);
+ 
+             if (!ret) {
+@@ -223,7 +218,7 @@
+             mData = previewData;
+ 
+             // need to fill mFormat so gwenview can tell the type when trying to save
+-            mFormat = mFormatHint;
++            mFormat = "jpeg";
+         } else {
+ #else
+         {
