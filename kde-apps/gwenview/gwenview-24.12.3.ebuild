@@ -82,6 +82,11 @@ BDEPEND="
 	dev-util/wayland-scanner
 "
 
+src_unpack() {
+        epatch "${FILESDIR}/rawfiles.patch"
+        ecm_src_unpack
+}
+
 src_prepare() {
 	ecm_src_prepare
 	if ! use mpris; then
