@@ -29,3 +29,9 @@ src_install() {
 	dobin out/yarr
 	dodoc doc/*
 }
+
+pkg_postinst() {
+	elog "Yarr has no gui of its own, when started it will by default run a webserver on localhost:7070"
+	elog "which can be used with a web browser"
+	elog "All user data is stored in ~/.config/yarr"
+}
