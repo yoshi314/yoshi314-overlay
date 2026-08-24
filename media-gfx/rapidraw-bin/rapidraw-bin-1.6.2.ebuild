@@ -2,13 +2,17 @@ EAPI=8
 
 DESCRIPTION="A RAW editor with various AI integrations"
 HOMEPAGE="https://github.com/CyberTimon/RapidRAW"
-SRC_URI="https://github.com/CyberTimon/RapidRAW/releases/download/v${PV}/03_RapidRAW_v${PV}_ubuntu-24.04_amd64.deb -> ${P}.deb"
+SRC_URI="https://github.com/CyberTimon/RapidRAW/releases/download/v${PV}/03_RapidRAW_v${PV}_ubuntu-24.04_amd64.deb -> ${P}.deb
+tethering? ( https://github.com/CyberTimon/RapidRAW/releases/download/v${PV}/03_tethering_RapidRAW_v${PV}_ubuntu-24.04_amd64.deb -> ${P}-tethering.deb )"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RDEPEND="net-libs/webkit-gtk:4.1"
+IUSE="tethering"
+
+RDEPEND="net-libs/webkit-gtk:4.1
+tethering? ( media-libs/libgphoto2 ) "
 
 inherit unpacker
 
