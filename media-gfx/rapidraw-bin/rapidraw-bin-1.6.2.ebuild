@@ -20,7 +20,12 @@ S=${WORKDIR}
 
 src_unpack() {
 	cd $WORKDIR
-	unpack_deb ${P}.deb
+
+	if use tethering; then
+		unpack_deb ${P}-tethering.deb
+	else
+		unpack_deb ${P}.deb
+	fi
 }
 src_compile() {
 	elog "compile"
