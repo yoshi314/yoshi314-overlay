@@ -23,7 +23,6 @@ fi
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="alsa sdl"
 
 RDEPEND="
 	media-libs/libsdl2[opengl,video]
