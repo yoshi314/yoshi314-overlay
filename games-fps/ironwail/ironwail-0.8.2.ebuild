@@ -44,6 +44,9 @@ src_install() {
 	dobin ironwail
 	insinto /usr/share/${P}
 	doins ${WORKDIR}/${PN}-${PV}/Quake/ironwail.pak
+	dodoc ${WORKDIR}/${PN}-${PV}/Quakespasm.txt
+	dodoc ${WORKDIR}/${PN}-${PV}/Quakespasm.html
+	dodoc ${WORKDIR}/${PN}-${PV}/Quakespasm-Music.txt
 	einstalldocs
 }
 
